@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - eLearning CUTM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: rgb(245, 245, 245);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      gap: 10px;
+    }
+
+    .logo-text {
+      color: #fda140;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #fd7424;
+    }
+
+    .search-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-box {
+      padding: 6px 12px;
+      border: 1px solid #fd7424;
+      border-radius: 5px;
+    }
+
+    .signup-form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 90%;
+    }
+
+    .signup-form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .signup-form-container input[type="text"],
+    .signup-form-container input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .password-container {
+      position: relative;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .password-container input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .password-container i {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #000;
+    }
+
+    form button {
+      width: 100%;
+      padding: 12px;
+      background-color: #fd973d;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #fda140;
+    }
+
+    .signup-form-container p {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .signup-form-container p a {
+      color: #fd973d;
+      text-decoration: none;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgb(245, 245, 245);
+    }
+
+    .footer-left, .footer-box {
+      width: 30%;
+    }
+
+    .footer-left .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      color: #fda140;
+    }
+
+    .footer-left .logo i {
+      margin-right: 10px;
+    }
+
+    .footer-sections {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      width: 70%;
+    }
+
+    .footer-box h3 {
+      margin-bottom: 10px;
+    }
+
+    .footer-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-box a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      background-color: rgb(245, 245, 245);
+      padding: 15px;
+    }
+
+    .footer-social a {
+      font-size: 20px;
+      margin: 0 10px;
+      color: black;
+    }
+
+    .footer-social a:hover {
+      color: #fd973d;
+    }
+
+    .popup {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: none;
+      animation: fadeOut 3s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="popup" id="popup-success">Contul a fost creat cu succes!</div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-content">
+      <div class="logo">
+        <i class="fa-solid fa-book-open" style="color: #fda140;"></i>
+        <span class="logo-text">eLearning <strong>CUTM</strong></span>
+      </div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Courses</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Page</a></li>
+          <li><a href="#">LearnPress Add-On</a></li>
+          <li><a href="#">Premium Theme</a></li>
+          <li><a href="#">Login / Register</a></li>
+        </ul>
+      </nav>
+      <div class="search-icon">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search-box" placeholder="Search...">
+      </div>
+    </div>
+  </header>
+
+  <!-- Sign Up Form -->
+  <div class="signup-form-container">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <input type="text" id="first-name" placeholder="First Name" required>
+      <input type="text" id="last-name" placeholder="Last Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Password" required>
+        <i class="fa-solid fa-eye-slash toggle-password" data-target="password"></i>
+      </div>
+
+      <div class="password-container">
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+        <i class="fa-solid fa-eye-slash toggle-password" data-target="confirm-password"></i>
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="file:///C:/Users/user/Desktop/Login/index.html">Login here</a></p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+          <i class="fa-solid fa-book-open" style="color: #fda140;"></i>
+          <span>eLearning CUTM</span>
+        </div>
+        <p>eLearning CUTM<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+      <div class="footer-sections">
+        <div class="footer-box">
+          <h3>GET HELP</h3>
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Latest Articles</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-box">
+          <h3>PROGRAMS</h3>
+          <ul>
+            <li><a href="#">Art & Design</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">IT & Software</a></li>
+            <li><a href="#">Languages</a></li>
+            <li><a href="#">Programming</a></li>
+          </ul>
+        </div>
+        <div class="footer-box">
+          <h3>CONTACT US</h3>
+          <p>123, Strada Unirii, Chișinău, Republic of Moldova</p>
+          <p>+373 2500-567-8988</p>
+          <p>supportims@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fname = document.getElementById('first-name').value;
+      const lname = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm-password').value;
+
+      if (pass !== confirm) {
+        alert('Parolele nu coincid!');
+        return;
+      }
+
+      if (
+        fname === 'Traian' &&
+        lname === 'Boboc' &&
+        phone === '+37368105543' &&
+        email === 'traianb415@gmail.com' &&
+        pass === 'traian009_'
+      ) {
+        const popup = document.getElementById('popup-success');
+        popup.style.display = 'block';
+        setTimeout(() => { popup.style.display = 'none'; }, 3000);
+      } else {
+        alert('Datele introduse nu sunt corecte.');
+      }
+    });
+
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const input = document.getElementById(icon.dataset.target);
+        const isHidden = input.type === 'password';
+        input.type = isHidden ? 'text' : 'password';
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+      });
+    });
+  </script>
+</body>
+</html>
